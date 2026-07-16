@@ -1,4 +1,3 @@
-#include "opcodes.h"
 
 #include <iostream>
 #include <cmath>
@@ -11,5 +10,5 @@ struct assemblyCode {
 };
 
 
-std::array<assemblyCode> DECODE_TABLE(256);
+//std::array<assemblyCode> DECODE_TABLE(256);
 
