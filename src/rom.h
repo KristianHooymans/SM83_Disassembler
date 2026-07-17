@@ -2,8 +2,9 @@
 #define ROMH
 #include <string>
 #include <cstdint>
+#include <vector>
 
-void loadRom(std::string filename);
+std::vector<uint8_t> loadRom(std::string filename);
 
 
 

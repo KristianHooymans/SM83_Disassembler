@@ -8,13 +8,23 @@
 #include <fstream>
 
 
-void loadRom(std::string filename) {
+std::vector<uint8_t> loadRom(std::string filename) {
   std::ifstream file(filename, std::ios::binary);
+  std::streampos fileSize = 0;
   if (file.is_open()) {
-    std::cout << filename << '\n';
+    file.seekg(0, std::ios::end);//get the size of the file
+    fileSize = file.tellg();
+    file.seekg(0, std::ios::beg); //return pointer to the start of the file
+
+    std::vector<uint8_t> romOutput(fileSize); // 
+    
+    for (auto i {0uz}; i < fileSize; ++i) {
+      
+    }
+
   }
   else {
-    std::cout << "Filename not found or unable to open file\n";
+    std::cerr << "Failed to open file" << '\n';
   }
 }
 
