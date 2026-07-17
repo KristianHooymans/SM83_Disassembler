@@ -10,19 +10,14 @@
 
 std::vector<uint8_t> loadRom(std::string filename) {
   std::ifstream file(filename, std::ios::binary);
-  std::streampos fileSize = 0;
   if (file.is_open()) {
-    file.seekg(0, std::ios::end);//get the size of the file
-    fileSize = file.tellg();
-    file.seekg(0, std::ios::beg); //return pointer to the start of the file
-
     std::vector<uint8_t> romOutput; // output vector
     char ch; // byte sized char 
 
     while (file.get(ch)) {
       uint8_t byte = static_cast<uint8_t>(ch);
       romOutput.push_back(byte);
-    }
+   }
     
     return romOutput;
 
