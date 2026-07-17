@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     int offset = 0; // for the loop, basically what line we are on right now in the ROM
     for (auto i {0uz}; i < 20; ++i) {
       std::cout << std::hex << std::setfill('0') << std::setw(7) << i << '0' << ": ";
-     for (auto i {0uz}; j < 16; ++j) {
+     for (auto j {0uz}; j < 16; ++j) {
         std::cout << std::hex << std::setfill('0') << std::setw(2) <<  static_cast<int>(rom[j+offset]) << " ";
       }
      std::cout << '\n';
