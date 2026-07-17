@@ -16,15 +16,23 @@ std::vector<uint8_t> loadRom(std::string filename) {
     fileSize = file.tellg();
     file.seekg(0, std::ios::beg); //return pointer to the start of the file
 
-    std::vector<uint8_t> romOutput(fileSize); // 
-    
-    for (auto i {0uz}; i < fileSize; ++i) {
-      
-    }
+    std::vector<uint8_t> romOutput(fileSize); // output vector
+    char ch; //byte sized char to get each byte
 
+    while (file.get(ch)) {
+      uint8_t byte =  static_cast<uint8_t>(ch);
+      romOutput.push_back(byte);
+    }
+    for (auto val : romOutput) {
+      std::cout << val;
+    }
+    return romOutput;
+
+  
   }
   else {
     std::cerr << "Failed to open file" << '\n';
+    return {};
   }
 }
 
