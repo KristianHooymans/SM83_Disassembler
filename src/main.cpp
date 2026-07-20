@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
     std::vector<uint8_t> rom = loadRom(argv[1]);
     std::cout << "File size: " << rom.size() << '\n';
     int offset = 0; // for the loop, basically what line we are on right now in the ROM
-    for (auto i {0uz}; i < 40; ++i) {
+    for (auto i {0uz}; i < 22; ++i) {
       std::cout << std::hex << std::setfill('0') << std::setw(7) << i << '0' << ": ";
      for (auto j {0uz}; j < 16; ++j) {
         std::cout << std::setfill('0') << std::setw(2) <<  static_cast<int>(rom[j+offset]) << " ";
@@ -32,6 +32,15 @@ int main(int argc, char* argv[])
     std::cout << ((headerChecksum(rom)) ? "HEADER CHECKSUM PASS" : "HEADER CHECKSUM FAIL") << '\n';
     Opcode op = DECODE_TABLE[0x00];
     std::cout << op.assemblyRepresentation << '\n';
+    
+    int iteratorForROM = 0x0100;
+    while (iteratorForROM <= 0x0150) {
+      uint8_t opcode = rom[iteratorForROM];
+      int length = DECODE_TABLE[opcode].length;
+      std::string assemblyCode = DECODE_TABLE[opcode].assemblyRepresentation;
+      std::cout << std::hex << std::setfill('0') << std::setw(2) << iteratorForROM << " " <<  static_cast<int>(opcode) << " " << assemblyCode << " ";
+      iteratorForROM += length;
+    }
   }
   else std::cout << "Input should be in the form: ./code /path/to/ROM/file\n";
 }

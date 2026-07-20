@@ -8,7 +8,7 @@
 enum class OperandType {NONE, IMM8, IMM16, REL8};
 
 struct Opcode {
-  int length;
+  int length = 1;
   std::string assemblyRepresentation = "ERROR";
   OperandType operandType;
 };
