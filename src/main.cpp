@@ -33,14 +33,12 @@ int main(int argc, char* argv[])
     Opcode op = DECODE_TABLE[0x00];
     std::cout << op.assemblyRepresentation << '\n';
     
-    int iteratorForROM = 0x0100;
-    while (iteratorForROM <= 0x0150) {
-      uint8_t opcode = rom[iteratorForROM];
-      int length = DECODE_TABLE[opcode].length;
-      std::string assemblyCode = DECODE_TABLE[opcode].assemblyRepresentation;
-      std::cout << std::hex << std::setfill('0') << std::setw(2) << iteratorForROM << " " <<  static_cast<int>(opcode) << " " << assemblyCode << " ";
-      iteratorForROM += length;
-    }
+   int pos = 0x0100;
+    while (pos <= 0x0150) {
+        DecodedInstruction d = decode(rom, pos);
+        std::cout << std::hex << std::setw(4) << std::setfill('0') << pos << ": " << d.code << "\n";
+        pos += d.length;
+      } 
   }
   else std::cout << "Input should be in the form: ./code /path/to/ROM/file\n";
 }
