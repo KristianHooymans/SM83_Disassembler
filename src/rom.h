@@ -5,8 +5,8 @@
 #include <vector>
 
 std::vector<uint8_t> loadRom(std::string filename);
-std::string romName(std::vector<uint8_t> hexDump);
-std::string romType(std::vector<uint8_t> hexDump);
-int romSize(std::vector<uint8_t> hexDump);
+std::string romName(const std::vector<uint8_t>& hexDump);
+std::string romType(const std::vector<uint8_t>& hexDump);
+int romSize(const std::vector<uint8_t>& hexDump);
 
 #endif 

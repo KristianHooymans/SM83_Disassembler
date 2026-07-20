@@ -22,9 +22,9 @@ int main(int argc, char* argv[])
      offset += 16;
     }
     std::cout << std::dec;
-    std::cout << '\n';
-    std::cout << romName(rom);
-    std::cout << '\n';
+    std::cout << romName(rom) << '\n';
+    std::cout << romSize(rom) << " KiB" <<  '\n';
+    std::cout << romType(rom) << '\n';
   }
   else std::cout << "Input should be in the form: ./code /path/to/ROM/file\n";
 }
