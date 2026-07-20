@@ -38,11 +38,17 @@ bool headerChecksum(const std::vector<uint8_t>& hexDump) {
 }
 
 
-//in KiB
+//calculate the rom size in KiB
 int romSize(const std::vector<uint8_t>& hexDump){
   int size = hexDump[0x148];
-  return romSizes[size];
-}
+  auto it = romSizes.find(size);
+  if (it == romSizes.end()) {
+    std::cerr << "Error: ROM Size not found!" << '\n';
+    return 0;
+  }
+  else {
+    return it->second;
+  }}
 
 
 std::string romName(const std::vector<uint8_t>& hexDump) {
