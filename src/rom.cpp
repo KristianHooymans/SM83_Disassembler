@@ -8,7 +8,10 @@
 #include <fstream>
 #include <unordered_map>
 
+
 std::unordered_map<int, std::string> cartType {{0x00, "ROM ONLY"}, {0x01, "MBC1"}, {0x02, "MBC1+RAM"}, {0x03, "MBC1+RAM+BATTERY"}, {0x05, "MBC2"}, {0x06, "MBC2+BATTERY"}, {0x08, "ROM+RAM"}, {0x09, "ROM+RAM+BATTERY"}, {0x0B, "MMM01"}, {0x0C, "MMM01+RAM"}, {0x0D, "MMM01+RAM+BATTERY"}, {0x0F, "MBC3+TIMER+BATTERY"}, {0x10, "MBC3+TIMER+RAM+BATTERY"}, {0x11, "MBC3"}, {0x12, "MBC3+RAM"}, {0x13, "MBC3+RAM+BATTERY"}, {0x19, "MBC5"}, {0x1A, "MBC5+RAM"}, {0x1B, "MBC5+RAM+BATTERY"}, {0x1C, "MBC5+RUMBLE"}, {0x1D, "MBC5+RUMBLE+RAM"}, {0x1E, "MBC5+RUMBLE+RAM+BATTERY"}, {0x20, "MBC6"}, {0x22, "MBC7+SENSOR+RUMBLE+RAM+BATTERY"}, {0xFC, "POCKET CAMERA"}, {0xFD, "BANDAI TAMA5"}, {0xFE, "HuC3"}, {0xFF, "HuC1+RAM+BATTERY"}};
+
+std::unordered_map<int, int> romSizes {{0x00, 32}, {0x01, 64}, {0x02, 128}, {0x03, 256}, {0x04, 512}, {0x05, 1024}, {0x06, 2048}, {0x07, 4096}, {0x08, 8192}};
 
 std::string romType(const std::vector<uint8_t>& hexDump) {
   int type = hexDump[0x147];
@@ -22,11 +25,24 @@ std::string romType(const std::vector<uint8_t>& hexDump) {
   }
 }
 
+
+bool headerChecksum(const std::vector<uint8_t>& hexDump) {
+  uint8_t checksum {0};
+  for (uint16_t address = 0x0134; address <= 0x014c; ++address){
+    checksum = checksum - hexDump[address] - 1;
+  }
+  if (hexDump[0x014D] == checksum) {
+    return true;
+  }
+  return false;
+}
+
+
 //in KiB
 int romSize(const std::vector<uint8_t>& hexDump){
   int size = hexDump[0x148];
-  return (1 << size) * 32;
- }
+  return romSizes[size];
+}
 
 
 std::string romName(const std::vector<uint8_t>& hexDump) {

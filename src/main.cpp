@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
     std::cout << romName(rom) << '\n';
     std::cout << romSize(rom) << " KiB" <<  '\n';
     std::cout << romType(rom) << '\n';
+    std::cout << ((headerChecksum(rom)) ? "HEADER CHECKSUM PASS" : "HEADER CHECKSUM FAIL") << '\n';
   }
   else std::cout << "Input should be in the form: ./code /path/to/ROM/file\n";
 }
