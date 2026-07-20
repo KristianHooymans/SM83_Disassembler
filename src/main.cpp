@@ -32,13 +32,9 @@ int main(int argc, char* argv[])
     std::cout << ((headerChecksum(rom)) ? "HEADER CHECKSUM PASS" : "HEADER CHECKSUM FAIL") << '\n';
     Opcode op = DECODE_TABLE[0x00];
     std::cout << op.assemblyRepresentation << '\n';
+
+    disassemble(rom);
     
-   int pos = 0x0100;
-    while (pos <= 0x0150) {
-        DecodedInstruction d = decode(rom, pos);
-        std::cout << std::hex << std::setw(4) << std::setfill('0') << pos << ": " << d.code << "\n";
-        pos += d.length;
-      } 
   }
   else std::cout << "Input should be in the form: ./code /path/to/ROM/file\n";
 }

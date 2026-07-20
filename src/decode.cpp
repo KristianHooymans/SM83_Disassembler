@@ -5,9 +5,21 @@
 #include <vector>
 #include <string>
 #include <array>
-
+#include <iomanip>
 
 std::array<Opcode, 256> DECODE_TABLE;
+
+
+void disassemble(const std::vector<uint8_t>& rom) {
+  int pos = 0x0100;
+  while (pos <= rom.size()) {
+    DecodedInstruction d = decode(rom, pos);
+    std::cout << std::hex << std::setw(4) << std::setfill('0') << pos << ": " << d.code << "\n";
+    pos += d.length;
+    if(pos + 2 >= rom.size()) break;
+  } 
+}
+
 
 DecodedInstruction decode(const std::vector<uint8_t>& rom, int pos) {
   uint8_t opcode = rom[pos];

@@ -4,13 +4,13 @@
 #include <string>
 #include <array>
 #include <cstdint>
-
+#include <iomanip>
 
 enum class OperandType {NONE, IMM8, IMM16, REL8};
 
 struct Opcode {
   int length = 1;
-  std::string assemblyRepresentation = "ERROR";
+  std::string assemblyRepresentation = "DB";
   OperandType operandType;
 };
 
@@ -24,5 +24,7 @@ struct DecodedInstruction {
 };
 
 DecodedInstruction decode(const std::vector<uint8_t>& rom, int pos);
+
+void disassemble(const std::vector<uint8_t>& rom);
 
 #endif
