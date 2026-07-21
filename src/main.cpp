@@ -30,8 +30,6 @@ int main(int argc, char* argv[])
     std::cout << romSize(rom) << " KiB" <<  '\n';
     std::cout << romType(rom) << '\n';
     std::cout << ((headerChecksum(rom)) ? "HEADER CHECKSUM PASS" : "HEADER CHECKSUM FAIL") << '\n';
-    Opcode op = DECODE_TABLE[0x00];
-    std::cout << op.assemblyRepresentation << '\n';
 
     disassemble(rom);
     

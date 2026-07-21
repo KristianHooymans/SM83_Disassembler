@@ -12,6 +12,7 @@ struct Opcode {
   int length = 1;
   std::string assemblyRepresentation = "DB";
   OperandType operandType;
+  bool valid = false;
 };
 
 extern std::array<Opcode, 256> DECODE_TABLE;
