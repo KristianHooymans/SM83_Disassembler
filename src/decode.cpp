@@ -28,7 +28,7 @@ DecodedInstruction decode(const std::vector<uint8_t>& rom, int pos) {
   int length = entry.length;
 
   if (!entry.valid) {
-    code += std::format(" ${:02X}", rom[pos+1]);
+    code += std::format(" ${:02X}", rom[pos]);
   }
 
   else {
@@ -63,21 +63,13 @@ DecodedInstruction decode(const std::vector<uint8_t>& rom, int pos) {
 void initDecodeTable() {
 
  DECODE_TABLE[0x00] = {1, "NOP", OperandType::NONE, true};
- DECODE_TABLE[0xAF] = {1, "XOR", OperandType::NONE, true};
- DECODE_TABLE[0xC9] = {1, "RET", OperandType::NONE, true};
- DECODE_TABLE[0x76] = {1, "HALT", OperandType::NONE, true};
- DECODE_TABLE[0x3E] = {2, "LD A, ", OperandType::IMM8, true};
- DECODE_TABLE[0x21] = {3, "LD HL, ", OperandType::IMM16, true};
- DECODE_TABLE[0xC3] = {3, "JP ", OperandType::IMM16, true};
- DECODE_TABLE[0xCD] = {3, "CALL ", OperandType::IMM16, true};
- DECODE_TABLE[0x18] = {2, "JR ", OperandType::REL8, true};
- DECODE_TABLE[0x10] = {2, "STOP", OperandType::IMM8, true};
+ DECODE_TABLE[0x10] = {2, "STOP", OperandType::NONE, true};
  DECODE_TABLE[0x20] = {2, "JR NZ, ", OperandType::REL8, true};
  DECODE_TABLE[0x30] = {2, "JR NC, ", OperandType::REL8, true};
  DECODE_TABLE[0x40] = {1, "LD B, B", OperandType::NONE, true};
  DECODE_TABLE[0x50] = {1, "LD D, B", OperandType::NONE, true};
  DECODE_TABLE[0x60] = {1, "LD H, B", OperandType::NONE, true};
- DECODE_TABLE[0x70] = {1, "LD HL, B", OperandType::NONE, true};
+ DECODE_TABLE[0x70] = {1, "LD (HL), B", OperandType::NONE, true};
  DECODE_TABLE[0x80] = {1, "ADD A, B", OperandType::NONE, true};
  DECODE_TABLE[0x90] = {1, "SUB A, B", OperandType::NONE, true};
  DECODE_TABLE[0xA0] = {1, "AND A, B", OperandType::NONE, true};
@@ -97,6 +89,28 @@ void initDecodeTable() {
  DECODE_TABLE[0x81] = {1, "ADD A, C", OperandType::NONE, true};
  DECODE_TABLE[0x91] = {1, "SUB A, C", OperandType::NONE, true};
  DECODE_TABLE[0xA1] = {1, "AND A, C", OperandType::NONE, true};
+ DECODE_TABLE[0xB1] = {1, "OR A, C", OperandType::NONE, true};
+ DECODE_TABLE[0xC1] = {1, "POP BC", OperandType::NONE, true};
+ DECODE_TABLE[0xD1] = {1, "POP DE", OperandType::NONE, true};
+ DECODE_TABLE[0xE1] = {1, "POP HL", OperandType::NONE, true};
+ DECODE_TABLE[0xF1] = {1, "POP AF", OperandType::NONE, true};
+ DECODE_TABLE[0x02] = {1, "LD (BC), A", OperandType::NONE, true};
+ DECODE_TABLE[0x12] = {1, "LD (DE), A", OperandType::NONE, true};
+ DECODE_TABLE[0x22] = {1, "LD (HL+), A", OperandType::NONE, true};
+ DECODE_TABLE[0x32] = {1, "LD (HL-), A", OperandType::NONE, true};
+ DECODE_TABLE[0x42] = {1, "LD B, D", OperandType::NONE, true};
+ DECODE_TABLE[0x52] = {1, "LD D, D", OperandType::NONE, true};
+ DECODE_TABLE[0x62] = {1, "LD H, D", OperandType::NONE, true};
+ DECODE_TABLE[0x72] = {1, "LD (HL), D", OperandType::NONE, true};
+ DECODE_TABLE[0x82] = {1, "ADD A, D", OperandType::NONE, true};
+ DECODE_TABLE[0x92] = {1, "SUB A, D", OperandType::NONE, true};
+ DECODE_TABLE[0xA2] = {1, "AND A, D", OperandType::NONE, true};
+ DECODE_TABLE[0xB2] = {1, "OR A, D", OperandType::NONE ,true};
+ DECODE_TABLE[0xC2] = {3, "JP NZ, ", OperandType::IMM16, true};
+ DECODE_TABLE[0xD2] = {3, "JP NC, ", OperandType::IMM16, true};
+ DECODE_TABLE[0xE2] = {1, "LDH (C), A", OperandType::NONE, true};
+ DECODE_TABLE[0xF2] = {1, "LDH A, (C)", OperandType::NONE, true};
+
 
 
 }
