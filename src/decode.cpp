@@ -111,6 +111,8 @@ void initDecodeTable() {
  DECODE_TABLE[0xE2] = {1, "LDH (C), A", OperandType::NONE, true};
  DECODE_TABLE[0xF2] = {1, "LDH A, (C)", OperandType::NONE, true};
  DECODE_TABLE[0x03] = {1, "INC BC", OperandType::NONE, true};
+ DECODE_TABLE[0x13] = {1, "INC DE", OperandType::NONE, true};
+ DECODE_TABLE[0x23] = {1, "INC HL", OperandType::NONE, true};
 
 
 
