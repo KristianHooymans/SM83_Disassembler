@@ -5,6 +5,7 @@
 #include <array>
 #include <cstdint>
 #include <iomanip>
+#include <vector>
 
 enum class OperandType {NONE, IMM8, IMM16, REL8};
 
@@ -13,9 +14,11 @@ struct Opcode {
   std::string assemblyRepresentation = "DB";
   OperandType operandType;
   bool valid = false;
+  std::string suffix = "";
 };
 
 extern std::array<Opcode, 256> DECODE_TABLE;
+extern std::array<std::string, 256> CB_TABLE;
 
 void initDecodeTable();
 
