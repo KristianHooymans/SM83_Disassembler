@@ -113,8 +113,17 @@ void initDecodeTable() {
  DECODE_TABLE[0x03] = {1, "INC BC", OperandType::NONE, true};
  DECODE_TABLE[0x13] = {1, "INC DE", OperandType::NONE, true};
  DECODE_TABLE[0x23] = {1, "INC HL", OperandType::NONE, true};
-
-
+ DECODE_TABLE[0x33] = {1, "INC SP", OperandType::NONE, true};
+ DECODE_TABLE[0x43] = {1, "LD B, E", OperandType::NONE, true};
+ DECODE_TABLE[0x53] = {1, "LD D, E", OperandType::NONE, true};
+ DECODE_TABLE[0x63] = {1, "LD H, E", OperandType::NONE, true};
+ DECODE_TABLE[0x73] = {1, "LD (HL), E", OperandType::NONE, true};
+ DECODE_TABLE[0x83] = {1, "ADD A, D", OperandType::NONE, true};
+ DECODE_TABLE[0x93] = {1, "SUB A, E", OperandType::NONE, true};
+ DECODE_TABLE[0xA3] = {1, "AND A, E", OperandType::NONE, true};
+ DECODE_TABLE[0xB3] = {1, "OR A, E", OperandType::NONE, true};
+ DECODE_TABLE[0xC3] = {3, "JP ", OperandType::NONE, true};
+ DECODE_TABLE[0xF3] = {1, "DI", OperandType::NONE, true}; // skipped D and E as they have no entries.
 
 
 }
